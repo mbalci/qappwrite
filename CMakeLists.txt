@@ -9,6 +9,11 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Network Gui)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+
 add_library(${PROJECT_NAME}
 # HEADERS:
 
