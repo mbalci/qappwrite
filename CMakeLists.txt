@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.2)
 
 project(QAppWrite)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Network Gui)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Network Gui)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
@@ -177,9 +179,9 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        Qt6::Core
-        Qt6::Network
-        Qt6::Gui
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Network
+        Qt${QT_VERSION_MAJOR}::Gui
 
 )
 
