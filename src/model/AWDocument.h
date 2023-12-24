@@ -32,7 +32,7 @@
 
 namespace OpenAPI {
 
-class APPWRITE_EXPORT AWDocument : public AWObject, public QObject {
+class APPWRITE_EXPORT AWDocument : public AWObject{
 public:
     AWDocument();
     AWDocument(QString json);
