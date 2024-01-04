@@ -322,7 +322,6 @@ void AWHttpRequestWorker::execute(AWHttpRequestInput *input) {
     }
 
     if (input->request_body.size() > 0) {
-        qDebug() << "got a request body";
         request_content.clear();
         if(!isFormData && (input->var_layout != MULTIPART) && isRequestCompressionEnabled){
             request_content.append(compress(input->request_body, 7, AWCompressionType::Gzip));
