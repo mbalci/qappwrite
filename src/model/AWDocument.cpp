@@ -51,6 +51,9 @@ void AWDocument::initializeModel() {
 
     m_permissions_isSet = false;
     m_permissions_isValid = false;
+	
+	m_data_isSet = false;
+	m_data_isValid = false;
 }
 
 void AWDocument::fromJson(QString jsonString) {
@@ -64,21 +67,31 @@ void AWDocument::fromJsonObject(QJsonObject json) {
 
     m_id_isValid = ::OpenAPI::fromJsonValue(id, json[QString("$id")]);
     m_id_isSet = !json[QString("$id")].isNull() && m_id_isValid;
+	json.remove("$id");
 
     m_collection_id_isValid = ::OpenAPI::fromJsonValue(collection_id, json[QString("$collectionId")]);
     m_collection_id_isSet = !json[QString("$collectionId")].isNull() && m_collection_id_isValid;
+	json.remove("$collectionId");
 
     m_database_id_isValid = ::OpenAPI::fromJsonValue(database_id, json[QString("$databaseId")]);
     m_database_id_isSet = !json[QString("$databaseId")].isNull() && m_database_id_isValid;
+	json.remove("$databaseId");
 
     m_created_at_isValid = ::OpenAPI::fromJsonValue(created_at, json[QString("$createdAt")]);
     m_created_at_isSet = !json[QString("$createdAt")].isNull() && m_created_at_isValid;
+	json.remove("$createdAt");
 
     m_updated_at_isValid = ::OpenAPI::fromJsonValue(updated_at, json[QString("$updatedAt")]);
     m_updated_at_isSet = !json[QString("$updatedAt")].isNull() && m_updated_at_isValid;
+	json.remove("$updatedAt");
 
     m_permissions_isValid = ::OpenAPI::fromJsonValue(permissions, json[QString("$permissions")]);
     m_permissions_isSet = !json[QString("$permissions")].isNull() && m_permissions_isValid;
+	json.remove("$permissions");
+	
+	data = json;
+	m_data_isValid = true;
+	m_data_isSet = true;
 }
 
 QString AWDocument::asJson() const {
@@ -108,6 +121,11 @@ QJsonObject AWDocument::asJsonObject() const {
     if (permissions.size() > 0) {
         obj.insert(QString("$permissions"), ::OpenAPI::toJsonValue(permissions));
     }
+	if (!data.isEmpty()) {
+		for (auto i = data.constBegin(); i != data.constEnd(); i++) {
+			obj.insert(i.key(), ::OpenAPI::toJsonValue(i.value()));
+		}
+	}
     return obj;
 }
 
@@ -204,7 +222,28 @@ bool AWDocument::is_permissions_Set() const{
 }
 
 bool AWDocument::is_permissions_Valid() const{
-    return m_permissions_isValid;
+	return m_permissions_isValid;
+}
+
+QJsonObject AWDocument::getData() const
+{
+	return data;
+}
+
+void AWDocument::setData(const QJsonObject &data)
+{
+	this->data = data;
+	this->m_data_isSet = true;
+}
+
+bool AWDocument::is_data_Set() const
+{
+	return m_data_isSet;
+}
+
+bool AWDocument::is_data_Valid() const
+{
+	return m_data_isValid;
 }
 
 bool AWDocument::isSet() const {

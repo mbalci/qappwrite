@@ -72,7 +72,12 @@ public:
     void setPermissions(const QList<QString> &permissions);
     bool is_permissions_Set() const;
     bool is_permissions_Valid() const;
-
+	
+	QJsonObject getData() const;
+	void setData(const QJsonObject& data);
+	bool is_data_Set() const;
+	bool is_data_Valid() const;
+	
     virtual bool isSet() const override;
     virtual bool isValid() const override;
 
@@ -102,6 +107,10 @@ private:
     QList<QString> permissions;
     bool m_permissions_isSet;
     bool m_permissions_isValid;
+	
+	QJsonObject data;
+	bool m_data_isSet;
+	bool m_data_isValid;
 };
 
 } // namespace OpenAPI
