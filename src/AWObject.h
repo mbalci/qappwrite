@@ -26,7 +26,9 @@ public:
     AWObject(QString jsonString) {
         fromJson(jsonString);
     }
-
+	AWObject(QJsonObject json) {
+        fromJsonObject(json);
+    }
     virtual ~AWObject() {}
 
     virtual QJsonObject asJsonObject() const {
