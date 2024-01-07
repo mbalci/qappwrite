@@ -103,9 +103,9 @@ void AWExecution::fromJsonObject(QJsonObject json) {
 
     m_status_code_isValid = ::OpenAPI::fromJsonValue(status_code, json[QString("statusCode")]);
     m_status_code_isSet = !json[QString("statusCode")].isNull() && m_status_code_isValid;
-
-    m_response_isValid = ::OpenAPI::fromJsonValue(response, json[QString("response")]);
-    m_response_isSet = !json[QString("response")].isNull() && m_response_isValid;
+	
+	m_response_isValid = ::OpenAPI::fromJsonValue(response, json[QString("responseBody")]);
+    m_response_isSet = !json[QString("responseBody")].isNull() && m_response_isValid;
 
     m_stdout_isValid = ::OpenAPI::fromJsonValue(stdout, json[QString("stdout")]);
     m_stdout_isSet = !json[QString("stdout")].isNull() && m_stdout_isValid;
@@ -151,7 +151,7 @@ QJsonObject AWExecution::asJsonObject() const {
         obj.insert(QString("statusCode"), ::OpenAPI::toJsonValue(status_code));
     }
     if (m_response_isSet) {
-        obj.insert(QString("response"), ::OpenAPI::toJsonValue(response));
+		obj.insert(QString("responseBody"), ::OpenAPI::toJsonValue(response));
     }
     if (m_stdout_isSet) {
         obj.insert(QString("stdout"), ::OpenAPI::toJsonValue(stdout));
